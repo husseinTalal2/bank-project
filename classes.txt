@@ -1,0 +1,76 @@
+Classes:
+Person{
+int id
+string name
+string email
+string address
+char gender
+
+getId()
+getName()
+getEmail()
+getAddress()
+getGender()
+
+setName()
+setEmail()
+setAddress()
+setGender()
+
+getInfo()
+
+}
+
+
+
+
+
+User extends Person{
+float balance
+getBalance()
+setBalance(double balance){
+	this.balance = balance
+}
+deposit()
+withdraw()
+}
+
+
+
+
+Admin extends Person{
+	deposit(int userId, double amount)
+	witdraw(int userId, double amount)
+	editUser(int userId, string changeType, string changeValue){
+		switch(changeType){
+			case "name":
+				user.setName(changeValue)
+		}	
+	}
+n1 = new Transaction(sender, reciever, amount)
+			
+}
+
+
+
+
+
+
+Transaction{
+	sender.withdraw
+		
+}
+
+
+
+
+
+
+
+for data:
+ArrayList or Vector<Transaction>
+HashMap<User>
+
+
+
+

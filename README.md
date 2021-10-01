@@ -10,7 +10,7 @@ Team project using Java language for ACP subject
 - Each user can edit his/her account info
 - Each user has a unique ID as account number 
 - Each user can have all his/her transactions on the account at any time
-kugdsuci
+
 ## Team Members
 - Hussein Talal
 - Shakar Kosar

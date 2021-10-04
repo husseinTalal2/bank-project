@@ -40,15 +40,15 @@ public class User extends Person {
         receivingTransactionIds.add(id);
     }
 
-    public void getSendingTransactions() {
-
+    public ArrayList<Integer> getSendingTransactions() {
+        return sendingTransactionIds; 
     }
 
-    public void getReceivingTransactions() {
-
+    public ArrayList<Integer> getReceivingTransactions() {
+        return receivingTransactionIds;
     }
 
     public void getHistory() {
-
+        
     }
 }

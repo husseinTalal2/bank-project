@@ -9,6 +9,8 @@ public class Main {
         System.out.println(p.getAddress());
         p.deposit(5000);
         p.addSendingTransactionId(156);
+        p.addSendingTransactionId(789);
+        p.addSendingTransactionId(8754);
         p.getSendingTransactions();
     }
 }

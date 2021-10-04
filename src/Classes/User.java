@@ -1,6 +1,7 @@
 package Classes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User extends Person {
     double balance = 0;
@@ -40,15 +41,19 @@ public class User extends Person {
         receivingTransactionIds.add(id);
     }
 
-    public ArrayList<Integer> getSendingTransactions() {
-        return sendingTransactionIds; 
+    public ArrayList<Transaction> getSendingTransactions(HashMap<Integer, Transaction> transactions) {
+        ArrayList<Transaction> sendingTransactions = new ArrayList<Transaction>();
+        for (int i = 0; i < sendingTransactionIds.size(); i++) {
+            sendingTransactions.add((Transaction) transactions.get(sendingTransactionIds.get(i)));
+        }
+        return sendingTransactions;
     }
 
-    public ArrayList<Integer> getReceivingTransactions() {
-        return receivingTransactionIds;
-    }
+    // public Transaction[] getReceivingTransactions(HashMap Transactions) {
+    // return ;
+    // }
 
     public void getHistory() {
-        
+
     }
 }

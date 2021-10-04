@@ -54,6 +54,9 @@ public class Person {
         return gender;
     }
     
+    public int getId() {
+        return this.id;
+    }
 
 
     

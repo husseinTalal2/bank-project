@@ -16,7 +16,7 @@ public class User extends Person {
         return balance;
     }
 
-    public void deposit(int amount) {
+    public void deposit(double amount) {
         if (amount <= 0) {
             System.out.println("The amount of deposited money should be greater than zero!");
         } else {
@@ -24,7 +24,7 @@ public class User extends Person {
         }
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(double amount) {
         if ((balance - amount) < 0) {
             System.out.println(
                     "The amount of withdrawn money is greater than the current balance, try again with a decent amount");

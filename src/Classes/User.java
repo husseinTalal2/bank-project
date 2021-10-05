@@ -49,11 +49,39 @@ public class User extends Person {
         return sendingTransactions;
     }
 
+    public ArrayList<Transaction> getReceivingTransactions(HashMap<Integer, Transaction> transactions) {
+        ArrayList<Transaction> receivingTransactions = new ArrayList<Transaction>();
+        for (int i = 0; i < receivingTransactionIds.size(); i++) {
+            receivingTransactions.add((Transaction) transactions.get(receivingTransactionIds.get(i)));
+        }
+        return receivingTransactions;
+    }
+
     // public Transaction[] getReceivingTransactions(HashMap Transactions) {
     // return ;
     // }
 
-    public void getHistory() {
+    public void getHistory(HashMap<Integer, Transaction> transactions, HashMap<Integer, User> users) {
+        ArrayList<Transaction> receivingTransactions = getReceivingTransactions(transactions);
+        ArrayList<Transaction> sendingTransactions = getSendingTransactions(transactions);
+
+        System.out.println("sending transactions: \n");
+        System.out.println("transaction no -- sender -- receiver -- amount -- date");
+        for (int i = 0; i < sendingTransactions.size(); i++) {
+            var transaction = sendingTransactions.get(i);
+            System.out.println(transaction.getId() + " -- " + Utils.getUserName(transaction.getSenderId(), users) + " -- "
+                    + Utils.getUserName(transaction.getReceiverId(), users) + " -- " + transaction.getAmount() + " -- " + transaction.getDate());
+        }
+
+        System.out.println();
+
+        System.out.println("receiving transactions: \n");
+        System.out.println("transaction no -- sender -- receiver -- amount -- date");
+        for (int i = 0; i < receivingTransactions.size(); i++) {
+            var transaction = receivingTransactions.get(i);
+            System.out.println(transaction.getId() + " -- " + Utils.getUserName(transaction.getSenderId(), users) + " -- "
+                    + Utils.getUserName(transaction.getReceiverId(), users) + " -- " + transaction.getAmount() + " -- " + transaction.getDate());
+        }
 
     }
 }

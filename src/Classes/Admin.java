@@ -19,6 +19,14 @@ public class Admin extends Person {
     }
 
     public void editUser(int userId, String changeType, String changeValue, HashMap<Integer, User> users) {
-
+        User user = Utils.getUser(userId, users);
+        switch (changeType) {
+            case "name":
+                user.setName(changeValue);
+            case "email":
+                user.setEmail(changeValue);
+            case "address":
+                user.setAddress(changeValue);
+        }
     }
 }

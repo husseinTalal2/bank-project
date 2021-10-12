@@ -69,8 +69,9 @@ public class User extends Person {
         System.out.println("transaction no -- sender -- receiver -- amount -- date");
         for (int i = 0; i < sendingTransactions.size(); i++) {
             var transaction = sendingTransactions.get(i);
-            System.out.println(transaction.getId() + " -- " + Utils.getUserName(transaction.getSenderId(), users) + " -- "
-                    + Utils.getUserName(transaction.getReceiverId(), users) + " -- " + transaction.getAmount() + " -- " + transaction.getDate());
+            System.out.println(transaction.getId() + " -- " + Utils.getUserName(transaction.getSenderId(), users)
+                    + " -- " + Utils.getUserName(transaction.getReceiverId(), users) + " -- " + transaction.getAmount()
+                    + " -- " + transaction.getDate());
         }
 
         System.out.println();
@@ -79,8 +80,9 @@ public class User extends Person {
         System.out.println("transaction no -- sender -- receiver -- amount -- date");
         for (int i = 0; i < receivingTransactions.size(); i++) {
             var transaction = receivingTransactions.get(i);
-            System.out.println(transaction.getId() + " -- " + Utils.getUserName(transaction.getSenderId(), users) + " -- "
-                    + Utils.getUserName(transaction.getReceiverId(), users) + " -- " + transaction.getAmount() + " -- " + transaction.getDate());
+            System.out.println(transaction.getId() + " -- " + Utils.getUserName(transaction.getSenderId(), users)
+                    + " -- " + Utils.getUserName(transaction.getReceiverId(), users) + " -- " + transaction.getAmount()
+                    + " -- " + transaction.getDate());
         }
 
     }

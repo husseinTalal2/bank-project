@@ -10,7 +10,7 @@ public class Main {
         HashMap<Integer, User> users = new HashMap<Integer, User>();
         User p = new User("aikay aikay", "email", "ishdc", 'f');
         users.put(p.getId(), p);
-        User p2 = new User("aikay aikay", "email", "ishdc", 'f');
+        User p2 = new User("naikay naikay", "email", "ishdc", 'f');
         users.put(p2.getId(), p2);
 
         // System.out.println(p.getName());
@@ -21,7 +21,7 @@ public class Main {
 
         // p.getSendingTransactions();
 
-        Transaction t = new Transaction(p.getId(), 156, 4000);
+        Transaction t = new Transaction(p.getId(), p2.getId(), 4000);
         Transaction t2 = new Transaction(p2.getId(), p.getId(), 500);
 
         // System.out.println(t.getDate());
@@ -31,8 +31,8 @@ public class Main {
         transactions.put(t.getId(), t);
         transactions.put(t2.getId(), t2);
         p.getHistory(transactions, users);
-        System.out.println();
-        p2.getHistory(transactions, users);
+        // System.out.println();
+        // p2.getHistory(transactions, users);
 
     }
 }

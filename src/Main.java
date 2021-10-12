@@ -1,5 +1,6 @@
 import java.util.HashMap;
 
+import Classes.Admin;
 import Classes.Person;
 import Classes.Transaction;
 import Classes.User;
@@ -13,6 +14,9 @@ public class Main {
         User p2 = new User("naikay naikay", "email", "ishdc", 'f');
         users.put(p2.getId(), p2);
 
+        Admin admin = new Admin("admin aikay", "email", "address", 'f');
+        admin.editUser(p.getId(), "name", "just aikay", users);
+        System.out.println(p.getName());
         // System.out.println(p.getName());
         // System.out.println(p.getEmail());
         // System.out.println(p.getAddress());
@@ -30,7 +34,8 @@ public class Main {
         p2.addSendingTransactionId(t2.getId());
         transactions.put(t.getId(), t);
         transactions.put(t2.getId(), t2);
-        p.getHistory(transactions, users);
+
+        // p.getHistory(transactions, users);
         // System.out.println();
         // p2.getHistory(transactions, users);
 

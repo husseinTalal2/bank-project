@@ -1,10 +1,11 @@
 package Classes;
 
 import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Random;
 
-public class Transaction {
+public class Transaction implements Serializable{
     Random rand = new Random();
     int maxNumber = 999999;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

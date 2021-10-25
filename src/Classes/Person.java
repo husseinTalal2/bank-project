@@ -1,8 +1,9 @@
 package Classes;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Person {
+public class Person implements Serializable{
     int id;
 	String name;
 	String email;

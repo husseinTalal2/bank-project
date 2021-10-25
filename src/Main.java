@@ -1,28 +1,38 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
+
+import java.io.Console;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import Classes.Admin;
+
 import Classes.Transaction;
 import Classes.User;
+import Classes.Utils;
 
 public class Main {
-    public static void main(String[] args) {
-        HashMap<Integer, Transaction> transactions = new HashMap<Integer, Transaction>();
-        HashMap<Integer, User> users = new HashMap<Integer, User>();
-        User p = new User("aikay aikay", "email", "ishdc", 'f');
-        users.put(p.getId(), p);
-        User p2 = new User("naikay naikay", "email", "ishdc", 'f');
-        users.put(p2.getId(), p2);
+    public static void main(String[] args) throws IOException {
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+        ArrayList<User> users = new ArrayList<User>();
+
+        User p = new User("aikay aikay", "email", "pass", "ishdc", 'f');
+        users.add(p);
+        User p2 = new User("naikay naikay", "email", "pass", "ishdc", 'f');
+        users.add(p2);
 
         Admin admin = new Admin("admin aikay", "email", "address", 'f');
         admin.editUser(p.getId(), "name", "just aikay", users);
-        System.out.println(p.getName());
-        // System.out.println(p.getName());
-        // System.out.println(p.getEmail());
-        // System.out.println(p.getAddress());
+
         p.deposit(5000);
         p2.deposit(5000);
 
-        // p.getSendingTransactions();
 
         Transaction t = new Transaction(p.getId(), p2.getId(), 4000);
         Transaction t2 = new Transaction(p2.getId(), p.getId(), 500);
@@ -31,12 +41,66 @@ public class Main {
         p.addSendingTransactionId(t.getId());
         p.addReceivingTransactionId(t2.getId());
         p2.addSendingTransactionId(t2.getId());
-        transactions.put(t.getId(), t);
-        transactions.put(t2.getId(), t2);
-
-        // p.getHistory(transactions, users);
-        // System.out.println();
+        transactions.add(t);
+        transactions.add(t2);
         // p2.getHistory(transactions, users);
+        // ListFile<ArrayList<Transaction>> data = new ListFile<ArrayList<Transaction>>("users.ser");
+        // data.open();
+        // data.add(transactions);
+        // System.out.println(data.obj);
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("users.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
+            objectOutputStream.writeObject(users);
+            objectOutputStream.close();
+            objectOutputStream.flush();
+            fileOutputStream.close();
+
+            FileInputStream fis = new FileInputStream("users.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList<User> result;
+            result = (ArrayList<User>) ois.readObject();
+
+            ois.close();
+
+            System.out.println(result.get(0).getName());
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+        catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        // boolean isFinished = true;
+        // System.out.println("welcome to the management system!");
+        // while (isFinished) {
+        // Scanner input = new Scanner(System.in);
+        // System.out.println("-------------------------");
+        // System.out.println("choose the mode:");
+        // System.out.println("1-user");
+        // System.out.println("2-admin");
+        // System.out.println("3-exit");
+        // System.out.println("-------------------------");
+        // int choose = input.nextInt();
+        // switch (choose) {
+        // case 1:
+        // System.out.println("-------------------------");
+        // System.out.println("1- already have an account:");
+        // System.out.println("2- signup:");
+        // System.out.println("-------------------------");
+        // choose = input.nextInt();
+        // break;
+
+        // default:
+        // break;
+        // }
+        // isFinished = false;
+        // }
     }
 }

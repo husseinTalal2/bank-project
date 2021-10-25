@@ -1,19 +1,24 @@
 package Classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class User extends Person {
+public class User extends Person implements Serializable{
     double balance = 0;
+    String password;
     ArrayList<Integer> sendingTransactionIds = new ArrayList<>();
     ArrayList<Integer> receivingTransactionIds = new ArrayList<>();
 
-    public User(String name, String email, String address, char gender) {
+    public User(String name, String email, String password, String address, char gender) {
         super(name, email, address, gender);
+        this.password = password;
     }
 
     public double getBalance() {
         return balance;
+    }
+    public String getPassword() {
+        return password;
     }
 
     public void deposit(double amount) {
@@ -41,18 +46,19 @@ public class User extends Person {
         receivingTransactionIds.add(id);
     }
 
-    public ArrayList<Transaction> getSendingTransactions(HashMap<Integer, Transaction> transactions) {
+    public ArrayList<Transaction> getSendingTransactions(ArrayList<Transaction> transactions) {
         ArrayList<Transaction> sendingTransactions = new ArrayList<Transaction>();
         for (int i = 0; i < sendingTransactionIds.size(); i++) {
-            sendingTransactions.add((Transaction) transactions.get(sendingTransactionIds.get(i)));
+            sendingTransactions.add(Utils.getTransaction(sendingTransactionIds.get(i), transactions));
         }
+
         return sendingTransactions;
     }
 
-    public ArrayList<Transaction> getReceivingTransactions(HashMap<Integer, Transaction> transactions) {
+    public ArrayList<Transaction> getReceivingTransactions(ArrayList<Transaction> transactions) {
         ArrayList<Transaction> receivingTransactions = new ArrayList<Transaction>();
         for (int i = 0; i < receivingTransactionIds.size(); i++) {
-            receivingTransactions.add((Transaction) transactions.get(receivingTransactionIds.get(i)));
+            receivingTransactions.add(Utils.getTransaction(sendingTransactionIds.get(i), transactions));
         }
         return receivingTransactions;
     }
@@ -61,7 +67,7 @@ public class User extends Person {
     // return ;
     // }
 
-    public void getHistory(HashMap<Integer, Transaction> transactions, HashMap<Integer, User> users) {
+    public void getHistory(ArrayList<Transaction> transactions, ArrayList<User> users) {
         ArrayList<Transaction> receivingTransactions = getReceivingTransactions(transactions);
         ArrayList<Transaction> sendingTransactions = getSendingTransactions(transactions);
 

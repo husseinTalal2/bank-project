@@ -15,35 +15,43 @@ public class Utils {
     }
 
     public static Transaction getTransaction(int id, ArrayList<Transaction> transactions) {
-        Transaction matchedTransaction = transactions.stream().filter(transaction -> transaction.getId() == id).findAny().orElse(null);
+        Transaction matchedTransaction = transactions.stream().filter(transaction -> transaction.getId() == id)
+                .findAny().orElse(null);
         return matchedTransaction;
-        
+
     }
+
     public static int getTransactionIndex(int id, ArrayList<Transaction> transactions) {
         Transaction t = Utils.getTransaction(id, transactions);
         return transactions.indexOf(t);
-        
+
     }
 
     public static User getUserByEmail(String email, ArrayList<User> users) {
         User matchedUser = users.stream().filter(user -> user.getEmail().equals(email)).findAny().orElse(null);
-        if(matchedUser == null){
+        if (matchedUser == null) {
             return null;
-        }else{
+        } else {
             return matchedUser;
         }
     }
+
     public static User userLogin(String email, String password, ArrayList<User> users) {
         User user = Utils.getUserByEmail(email, users);
-        if(user == null){
+        if (user == null) {
             return null;
-        }
-        else if(user.getPassword().equals(password)){
+        } else if (user.getPassword().equals(password)) {
+            System.out.println("loggedIn");
             return user;
-        }else{
+        } else {
             return null;
         }
     }
 
+    public static User userSignUp(String name, String email, String password, String address, char gender) {
+        User user = new User(name, email, password, address, gender);
+        System.out.println("signed up");
+        return user;
+    }
 
 }

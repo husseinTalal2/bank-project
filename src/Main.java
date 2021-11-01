@@ -16,6 +16,8 @@ import Classes.Admin;
 import Classes.Transaction;
 import Classes.User;
 import Classes.Utils;
+import Classes.Views.AdminView;
+import Classes.Views.UserModel;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -36,18 +38,12 @@ public class Main {
         Transaction t = new Transaction(p.getId(), p2.getId(), 4000);
         Transaction t2 = new Transaction(p2.getId(), p.getId(), 500);
 
-        // System.out.println(t.getDate());
         p.addSendingTransactionId(t.getId());
         p.addReceivingTransactionId(t2.getId());
         p2.addSendingTransactionId(t2.getId());
         transactions.add(t);
         transactions.add(t2);
-        // p2.getHistory(transactions, users);
-        // ListFile<ArrayList<Transaction>> data = new
-        // ListFile<ArrayList<Transaction>>("users.ser");
-        // data.open();
-        // data.add(transactions);
-        // System.out.println(data.obj);
+
         try {
             FileOutputStream fileOutputStream = new FileOutputStream("users.txt");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -66,13 +62,10 @@ public class Main {
 
             System.out.println(result.get(0).getName());
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -81,6 +74,7 @@ public class Main {
         while (isFinished) {
             String name, email, password, address;
             char gender;
+            Double amount;
             Scanner input = new Scanner(System.in);
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("-------------------------");
@@ -102,14 +96,16 @@ public class Main {
                 System.out.println("2- signup:");
                 System.out.println("-------------------------");
                 choose = input.nextInt();
+                User u;
                 switch (choose) {
                 case 1:
                     System.out.println("Enter  your email:");
                     email = reader.readLine();
                     System.out.println("Enter  your password:");
                     password = reader.readLine();
+                    u = Utils.userLogin(email, password, users);
 
-                    Utils.userLogin(email, password, users);
+                    UserModel.userDashboard(u, transactions, users);
                     break;
                 case 2:
                     System.out.println("enter your information:");
@@ -123,14 +119,31 @@ public class Main {
                     address = reader.readLine();
                     System.out.println("enter your gender: (f or m)");
                     gender = input.next().charAt(0);
-                    users.add(Utils.userSignUp(name, email, password, address, gender));
-                    // objectOutputStream.writeObject(users);
+                    u = Utils.userSignUp(name, email, password, address, gender);
+                    users.add(u);
+                    UserModel.userDashboard(u, transactions, users);
                     break;
                 default:
                     System.out.println("choose a number");
                     break;
                 }
                 break;
+            
+            case 2:
+                System.out.println("--------------------------");
+                System.out.println("choose what you want to do:");
+                System.out.println("1- withdraw from user");
+                System.out.println("2- deposit for user");
+                System.out.println("3- edit user data");
+                choose = input.nextInt();
+                switch(choose){
+                    case 1:
+                        System.out.println("enter user email:");
+                        email = reader.readLine();
+                        System.out.println("enter the amount:");
+                        amount = input.nextDouble();
+                        AdminView.withdrawFromUser(admin, email, amount, users);
+                }
 
             default:
                 break;

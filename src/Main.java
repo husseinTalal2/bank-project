@@ -72,7 +72,7 @@ public class Main {
         boolean isFinished = true;
         System.out.println("welcome to the management system!");
         while (isFinished) {
-            String name, email, password, address;
+            String name, email, password, address, changeType, newValue;
             char gender;
             Double amount;
             Scanner input = new Scanner(System.in);
@@ -143,6 +143,24 @@ public class Main {
                         System.out.println("enter the amount:");
                         amount = input.nextDouble();
                         AdminView.withdrawFromUser(admin, email, amount, users);
+                        break;
+                    case 2:
+                        System.out.println("enter user email:");
+                        email = reader.readLine();
+                        System.out.println("enter the amount:");
+                        amount = input.nextDouble();
+                        AdminView.depositForUser(admin, email, amount, users);
+                        break;
+                    case 3:
+                        System.out.println("enter user email:");
+                        email = reader.readLine();
+                        System.out.println("enter the type of change:");
+                        changeType = reader.readLine();
+                        System.out.println("enter the new value:");
+                        newValue = reader.readLine();
+                        AdminView.editUser(admin, email, changeType, newValue, users);
+                        System.out.println("data changed successfully");
+                        break;
                 }
 
             default:

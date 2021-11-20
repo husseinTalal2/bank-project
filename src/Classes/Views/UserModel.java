@@ -37,6 +37,7 @@ public class UserModel {
                 email = reader.readLine();
                 System.out.println("Enter  your password:");
                 password = reader.readLine();
+                users.get(0);
                 u = Utils.userLogin(email, password, users);
 
                 UserModel.userDashboard(u, transactions, users);
